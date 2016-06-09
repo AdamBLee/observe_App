@@ -2,14 +2,9 @@ angular.module('MainCtrl', ['harReportService'])
 
 .controller('MainController', function($scope, $location, $mdToast, harReportService) {
 
-  $scope.loading = false;
-
   $scope.validate = function() {
 
-      $scope.loading = true;
-
         try {
-
 					var parsedHarFile = JSON.parse($scope.harFile);
 
           if(!parsedHarFile.hasOwnProperty('log')) {

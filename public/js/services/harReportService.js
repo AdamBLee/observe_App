@@ -6,6 +6,7 @@ angular.module('harReportService', [])
 	var parsedHar = {};
 
 
+	//find 5 slowest resources
 
 
 

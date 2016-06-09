@@ -1,4 +1,4 @@
-angular.module('harReportCtrl', ['harReportService'])
+angular.module('harReportCtrl', ['harReportService', 'chart.js'])
 
 .controller('harReportController', function($scope, harReportService) {
 
@@ -7,14 +7,25 @@ angular.module('harReportCtrl', ['harReportService'])
 	var harString = harReportService.getHarJson();
 	var parsedHar = harReportService.getParsedHar();
 
+	var getPrimaryPageLoadtime = function() {
+		var log = parsedHar.log;
+		var pages = log.pages;
+		var page = pages[0];
+		var pageTimings = page.pageTimings;
+		var loadTime = pageTimings.onLoad;
+
+		return Math.round(loadTime);
+
+	}();
+
 	$scope.highlights = [
 		{
-				"name": "hey",
-				"value": "whats up"
+				"name": "Primary Page Load Time",
+				"value": getPrimaryPageLoadtime + " ms"
 		},
 		{
-				"name": "heya",
-				"value": "whats up bro"
+				"name": "Pages",
+				"value": "50ish"
 		},
 		{
 				"name": "Request Times",
