@@ -1,0 +1,38 @@
+<div class="jumbotron ">
+	<h2>Http Archive Report</h2>
+
+	<div class="reportDiv">
+		<label>Highlights</label>
+		<div flex layout="row" layout-xs  ng-repeat="highlight in highlights">
+			<md-content class="md-padding" >
+				<md-card >
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{highlight.name}}</span>
+            <span class="md-subhead">{{highlight.value}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click="test()">Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+			</md-content>
+		</div>
+		<div class="chartsDiv" >
+
+				 <chart value="myChart"></chart>
+			<!-- <canvas id="bar" class="chart chart-bar"
+  				chart-data="data" chart-labels="labels"> chart-series="series"
+			</canvas> -->
+		</div>
+
+
+	</div>
+
+	<md-content layout-wrap>
+		<md-button class="md-raised" href="/" aria-label="description">Analyze Another .har</md-button>
+	</md-content>
+
+
+</div>
