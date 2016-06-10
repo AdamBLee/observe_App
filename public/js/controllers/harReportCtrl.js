@@ -8,13 +8,13 @@ angular.module('harReportCtrl', ['harReportService', 'chart.js'])
 	var parsedHar = harReportService.getParsedHar();
 
 	var getPrimaryPageLoadtime = function() {
-		// var log = parsedHar.log;
-		// var pages = log.pages;
-		// var page = pages[0];
-		// var pageTimings = page.pageTimings;
-		// var loadTime = pageTimings.onLoad;
-		//
-		// return Math.round(loadTime);
+		var log = parsedHar.log;
+		var pages = log.pages;
+		var page = pages[0];
+		var pageTimings = page.pageTimings;
+		var loadTime = pageTimings.onLoad;
+
+		return Math.round(loadTime);
 
 	}();
 
@@ -28,8 +28,8 @@ angular.module('harReportCtrl', ['harReportService', 'chart.js'])
 				"value": "50ish"
 		},
 		{
-				"name": "Request Times",
-				"value": "1000ms"
+				"name": "Total Http Requests",
+				"value": harReportService.findNumberOfHttpRequests()
 		}
 	]
 

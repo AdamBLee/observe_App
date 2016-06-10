@@ -7,8 +7,6 @@ body { padding-top:30px; }
 
 }
 
-
-
 .textId {
 
   height: 100px;
@@ -17,10 +15,12 @@ body { padding-top:30px; }
 }
 
 .highlightCard {
+  width: 90%;
 
-  width: 15%;
+}
 
-
+.card {
+  width: 100%;
 
 }
 
@@ -29,4 +29,9 @@ body { padding-top:30px; }
   width: 90%;
 
 
+}
+
+.cardContainer {
+    width: 25%;
+    margin: 0;
 }

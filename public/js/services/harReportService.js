@@ -10,7 +10,15 @@ angular.module('harReportService', [])
 
 
 
+
 	return {
+
+	findNumberOfHttpRequests : function () {
+				var log = this.parsedHar.log;
+				var entries = log.entries;
+
+				return entries.length;
+	},
 
 	setParserHar : function(parsedHarFile) {
 		this.parsedHar = parsedHarFile;
