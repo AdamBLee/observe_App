@@ -3,22 +3,18 @@
 
 	<div class="reportDiv">
 		<label>Highlights</label>
-		<div flex layout="row" layout-xs  ng-repeat="highlight in highlights">
-			<md-content class="md-padding" >
-				<md-card >
+		<md-content class="md-padding" layout-xs="row" >
+		<div layout="row"  ng-repeat="highlight in highlights">
+				<md-card layout-sm ="column">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{highlight.name}}</span>
             <span class="md-subhead">{{highlight.value}}</span>
           </md-card-title-text>
         </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button ng-click="test()">Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
       </md-card>
-			</md-content>
 		</div>
+		</md-content>
 		<div class="chartsDiv" >
 
 			<div ng-controller="BarCtrl">
