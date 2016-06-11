@@ -16,7 +16,26 @@ body { padding-top:30px; }
 
 .highlightCard {
   width: 90%;
+  /*box-shadow: 2px 2px 2px #888888;*/
+  border-style: solid;
+  border-width: 2px;
+  border-color: #d3d3d3;
+  float: left;
+	text-align: left;
+	font-size: .5vw;
 
+}
+
+.highlightCardTitle {
+  float: left;
+  text-align: left;
+  font-size: 2vw;
+}
+
+.highlightCardValue {
+  float: left;
+  text-align: left;
+  font-size: 1.5vw;
 }
 
 .card {
@@ -31,7 +50,19 @@ body { padding-top:30px; }
 
 }
 
-.cardContainer {
-    width: 25%;
+.chartsDiv {
+  float: right;
+  width: 75%;
+
+  font-size: .7vw;
+
+}
+
+
+.cardsContainer {
+
+    width: auto;
+    float: left;
     margin: 0;
+    width: 20%;
 }

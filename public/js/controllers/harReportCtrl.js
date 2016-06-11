@@ -18,28 +18,29 @@ angular.module('harReportCtrl', ['harReportService', 'chart.js'])
 
 	}();
 
+
+	var largestResource = harReportService.findLargestResourceRequested(parsedHar);
+	var resourcesWithLoadTimes = harReportService.findResourcesWithLoadTime(parsedHar);
+
+	
+
 	$scope.highlights = [
 		{
 				"name": "Primary Page Load Time",
 				"value": getPrimaryPageLoadtime + " ms"
 		},
 		{
-				"name": "Pages",
-				"value": "50ish"
+				"name": "Largest Resource Requested",
+				"value": largestResource.name,
+				"extra": largestResource.value + " bytes"
 		},
 		{
 				"name": "Total Http Requests",
-				"value": harReportService.findNumberOfHttpRequests()
+				"value": harReportService.findNumberOfHttpRequests(parsedHar)
 		}
-	]
+	];
 
 
-	$scope.test = function () {
-
-		var x = "x";
-		var y = "y";
-
-	}
 
 
 	var data = {
