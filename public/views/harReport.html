@@ -36,9 +36,15 @@
 				</canvas>
 			</div>
 
-				<div ng-repeat="label in labels">
-						{{label}}
 
+
+				<div class="labelsInfo" ng-repeat="label in labelsAndUrlsToShow ">
+						{{label.label}} -- {{label.url}}
+
+				</div>
+
+				<div>
+					<md-button class="md-raised" ng-click="toggleFullUrls()" aria-label="description">{{labelsAndUrlsButtonMessage}}</md-button>
 				</div>
 
 			<div style="float: left">

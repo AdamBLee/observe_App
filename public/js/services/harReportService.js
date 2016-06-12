@@ -18,7 +18,7 @@ angular.module('harReportService', [])
 	getFastestLoadingResources :function(resourcesWithLoadTimes) {
 
 		resourcesWithLoadTimes.sort(function(a,b) {
-			return parseFloat(b.loadTime) - parseFloat(a.loadTime);
+			return parseFloat(a.loadTime) - parseFloat(b.loadTime);
 
 		});
 
