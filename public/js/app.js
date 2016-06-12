@@ -1,4 +1,4 @@
-var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRoutes', 'MainCtrl', 'NerdCtrl', 'NerdService', 'harReportCtrl', 'harReportService', 'chart.js'])
+var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRoutes', 'MainCtrl', 'harReportCtrl', 'harReportService', 'chart.js'])
 
 
 .controller("BarCtrl", function ($scope, harReportService) {
@@ -46,10 +46,11 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
     $scope.series = ['Slowest'];
     $scope.labelsAndUrls = labelsAndUrls;
     createAbbreviatedUrls();
-    $scope.labelsAndUrlsToShow = $scope.labelsAndUrls;
+    // $scope.labelsAndUrlsToShow = $scope.labelsAndUrls;
     $scope.labelsAndUrlsButtonMessage = "See Full Urls";
     $scope.toggleState = "abb";
     $scope.labelsAndUrlsToShow = $scope.abbLabelsAndUrls;
+    $scope.showNetworkPhases = false;
 
   };
 
@@ -92,10 +93,11 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
     $scope.series = ['Fastest'];
     $scope.labelsAndUrls = labelsAndUrls;
     createAbbreviatedUrls();
-    $scope.labelsAndUrlsToShow = $scope.labelsAndUrls;
+    // $scope.labelsAndUrlsToShow = $scope.labelsAndUrls;
     $scope.labelsAndUrlsButtonMessage = "See Full Urls";
     $scope.toggleState = "abb";
     $scope.labelsAndUrlsToShow = $scope.abbLabelsAndUrls;
+    $scope.showNetworkPhases = false;
 
   };
 
@@ -136,26 +138,44 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
 
   }
 
+  $scope.getAverageHttpPhasesLoadTimes = function() {
+    $scope.chartName = "Average time (ms) for HTTP Request Network Phases";
 
-  function getAverageHttpPhasesLoadTimes(numberOfResourcesToShow) {
-    $scope.chartName = "Average time (ms) in each of the http request phases";
+    var labels = [];
+    var series = [];
+    var data = [];
+    var labelsAndUrls = [];
+
+    var parsedHarJson = harReportService.getParsedHar();
+    var avgNetworkPhasesLoadTimes = harReportService.getResourcesWithHttpNetworkPhaseTimes(parsedHarJson);
+
+    var labels = [];
+    var data = [];
+
+    for(x in avgNetworkPhasesLoadTimes){
+      if(avgNetworkPhasesLoadTimes.hasOwnProperty(x)) {
+        labels.push(x);
+        data.push(avgNetworkPhasesLoadTimes[x]);
+
+      }
+    }
+
+    $scope.labels = labels;
+    $scope.data = [];
+    $scope.data.push(data);
+    $scope.series = "Network Phases";
+    $scope.labelsAndUrls = [];
+    createAbbreviatedUrls();
+    $scope.abbLabelsAndUrls = [];
+    $scope.labelsAndUrlsToShow = [];
+    $scope.toggleState = "";
+    $scope.showNetworkPhases = true;
+
 
   };
 
 
   $scope.getFastestLoadingResources();
-
-  // $scope.chartName = "test";
-  //
-  //
-  // $scope.labels = ['2000', '2007', '2008', '2009', '2010', '2011', '2012'];
-  // $scope.series = ['Series A', 'Series B'];
-  //
-  // $scope.data = [
-  //   [65, 59, 80, 81, 56, 55, 40],
-  //   [28, 48, 40, 19, 86, 27, 10]
-  // ];
-
 
 })
 

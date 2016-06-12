@@ -37,14 +37,13 @@
 			</div>
 
 
-
 				<div class="labelsInfo" ng-repeat="label in labelsAndUrlsToShow ">
 						{{label.label}} -- {{label.url}}
 
 				</div>
 
 				<div>
-					<md-button class="md-raised" ng-click="toggleFullUrls()" aria-label="description">{{labelsAndUrlsButtonMessage}}</md-button>
+					<md-button class="md-raised" ng-if="!showNetworkPhases"  ng-click="toggleFullUrls()" aria-label="description">{{labelsAndUrlsButtonMessage}}</md-button>
 				</div>
 
 			<div style="float: left">
@@ -54,7 +53,7 @@
 				<md-button class="md-raised" ng-click="getSlowestLoadingResources()" aria-label="description">Slowest Loading Resources</md-button>
 			</div>
 			<div style="float: left">
-				<md-button class="md-raised" ng-click="" aria-label="description">Times for Http phases</md-button>
+				<md-button class="md-raised" ng-click="getAverageHttpPhasesLoadTimes()" aria-label="description">Avg. Network Phase Times</md-button>
 			</div>
 
 		</div>
