@@ -1,7 +1,9 @@
 # observe_App
 
-##Required
+##Required 
 Node
+NPM
+
 
 ## Installation
 1. Download the repository
@@ -9,5 +11,6 @@ Node
 3. Install bower dependencies `bower install`
 4. Start up the server: `node server.js`
 5. View in browser at http://localhost:3000
+
 
 
