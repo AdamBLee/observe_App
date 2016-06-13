@@ -103,7 +103,7 @@ angular.module('harReportService', [])
 
 	},
 
-	getResourcesWithHttpNetworkPhaseTimes : function(parsedHarJson) {
+	getResourcesWithHttpNetworkPhaseTimes : function(parsedHarJson, isAverage) {
 		var log = parsedHarJson.log;
 		var entries = log.entries;
 
@@ -162,19 +162,16 @@ angular.module('harReportService', [])
 				}
 			}
 
-			//compute averages
-			//Dont' I have a function that tells me the number of entries?
-			//or just use numberOfResources
-
-
-		}
-		for(timing in networkPhasesTimings) {
-			if (networkPhasesTimings.hasOwnProperty(timing)) {
-				networkPhasesTimings[timing] = (networkPhasesTimings[timing] / numberOfResources).toPrecision(5);
-				networkPhasesTimings[timing] = parseFloat(networkPhasesTimings[timing]);
-			 }
 		}
 
+		if(isAverage) {
+			for(timing in networkPhasesTimings) {
+				if (networkPhasesTimings.hasOwnProperty(timing)) {
+					networkPhasesTimings[timing] = (networkPhasesTimings[timing] / numberOfResources).toPrecision(5);
+					networkPhasesTimings[timing] = parseFloat(networkPhasesTimings[timing]);
+				 }
+			}
+		}
 		return networkPhasesTimings;
 	},
 

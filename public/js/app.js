@@ -6,7 +6,7 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
 
 
   $scope.getSlowestLoadingResources = function() {
-    $scope.chartName = "Slowest Loading Resources compared to the average";
+    $scope.chartName = "Slowest Loading Resources (ms)";
 
     var labels = [];
     var series = [];
@@ -55,7 +55,7 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
   };
 
   $scope.getFastestLoadingResources = function() {
-    $scope.chartName = "Fastest Loading Resources compared to the average";
+    $scope.chartName = "Fastest Loading Resources (ms)";
 
     var labels = [];
     var series = [];
@@ -136,7 +136,25 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
         $scope.labelsAndUrlsButtonMessage = "See Full Urls";
     }
 
-  }
+  };
+
+
+  $scope.toggleNetworkTimings = function () {
+
+    if($scope.networkPhasesTimings == "total") {
+      $scope.networkPhasesTimings = "average";
+      $scope.networkTimingsButtonMessage = "See Average Network Phases Timings";
+      $scope.getAverageHttpPhasesLoadTimes();
+
+    } else {
+
+      $scope.networkPhasesTimings = "total";
+      $scope.networkTimingsButtonMessage = "See Total Network Phases Timings";
+      $scope.getTotalHttpPhasesLoadTimes();
+    }
+
+
+  };
 
   $scope.getAverageHttpPhasesLoadTimes = function() {
     $scope.chartName = "Average time (ms) for HTTP Request Network Phases";
@@ -147,12 +165,9 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
     var labelsAndUrls = [];
 
     var parsedHarJson = harReportService.getParsedHar();
-    var avgNetworkPhasesLoadTimes = harReportService.getResourcesWithHttpNetworkPhaseTimes(parsedHarJson);
+    var avgNetworkPhasesLoadTimes = harReportService.getResourcesWithHttpNetworkPhaseTimes(parsedHarJson, true);
 
-    var labels = [];
-    var data = [];
-
-    for(x in avgNetworkPhasesLoadTimes){
+    for(var x in avgNetworkPhasesLoadTimes){
       if(avgNetworkPhasesLoadTimes.hasOwnProperty(x)) {
         labels.push(x);
         data.push(avgNetworkPhasesLoadTimes[x]);
@@ -160,6 +175,8 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
       }
     }
 
+    $scope.networkPhasesTimings = "average";
+    $scope.networkTimingsButtonMessage = "See Total Network Phases Timings"
     $scope.labels = labels;
     $scope.data = [];
     $scope.data.push(data);
@@ -170,9 +187,41 @@ var observeApp = angular.module('observeApp', ['ngRoute', 'ngMaterial', 'appRout
     $scope.labelsAndUrlsToShow = [];
     $scope.toggleState = "";
     $scope.showNetworkPhases = true;
-
-
   };
+
+  $scope.getTotalHttpPhasesLoadTimes = function() {
+    $scope.chartName = "Total time (ms) for HTTP Request Network Phases";
+
+    var labels = [];
+    var series = [];
+    var data = [];
+    var labelsAndUrls = [];
+
+    var parsedHarJson = harReportService.getParsedHar();
+    var totalNetworkPhasesLoadTimes = harReportService.getResourcesWithHttpNetworkPhaseTimes(parsedHarJson, false);
+
+    for(x in totalNetworkPhasesLoadTimes){
+      if(totalNetworkPhasesLoadTimes.hasOwnProperty(x)) {
+        labels.push(x);
+        data.push(totalNetworkPhasesLoadTimes[x]);
+      }
+    }
+
+    $scope.networkPhasesTimings = "total";
+    $scope.networkTimingsButtonMessage = "See Average Network Phases Timings"
+    $scope.labels = labels;
+    $scope.data = [];
+    $scope.data.push(data);
+    $scope.series = "Network Phases";
+    $scope.labelsAndUrls = [];
+    createAbbreviatedUrls();
+    $scope.abbLabelsAndUrls = [];
+    $scope.labelsAndUrlsToShow = [];
+    $scope.toggleState = "";
+    $scope.showNetworkPhases = true;
+  };
+
+
 
 
   $scope.getFastestLoadingResources();

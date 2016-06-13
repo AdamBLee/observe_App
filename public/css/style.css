@@ -29,47 +29,42 @@ body { padding-top:30px; }
 .highlightCardTitle {
   float: left;
   text-align: left;
-  font-size: 2vw;
+  font-size: 0.93vw;
 }
 
 .highlightCardValue {
   float: left;
   text-align: left;
-  font-size: 1.5vw;
+  font-size: .75vw;
 }
 
 .card {
   width: 100%;
-
 }
 
 .highlightCardList {
 
   width: 90%;
-
-
 }
 
 .chartsDiv {
   float: right;
   width: 75%;
 
-
 }
 
 .labelsInfo {
 
   color: grey;
-  text-align: left;
+  text-align  : left;
+  font-size   : 0.8vw;
 
 }
-
 
 .cardsContainer {
 
     width: auto;
     float: left;
     margin: 0;
-    width: 20%;
-    float: left;
+    width: 21%;
 }

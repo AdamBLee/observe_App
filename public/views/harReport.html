@@ -12,9 +12,9 @@
 				<md-card  layout="column" layout-sm="row" ng-repeat="highlight in highlights">
         <md-card-title>
           <md-card-title-text>
-            <span class="md-body-2">{{highlight.name}}</span>
-            <span class="md-subhead">{{highlight.value}}</span>
-            <span class="md-subhead">{{highlight.extra}}</span>
+            <span class="highlightCardTitle">{{highlight.name}}</span>
+            <span class="highlightCardValue">{{highlight.value}}</span>
+            <span class="highlightCardValue">{{highlight.extra}}</span>
           </md-card-title-text>
         </md-card-title>
       </md-card>
@@ -44,6 +44,10 @@
 
 				<div>
 					<md-button class="md-raised" ng-if="!showNetworkPhases"  ng-click="toggleFullUrls()" aria-label="description">{{labelsAndUrlsButtonMessage}}</md-button>
+				</div>
+
+				<div>
+					<md-button class="md-raised" ng-if="showNetworkPhases"  ng-click="toggleNetworkTimings()" aria-label="description">{{networkTimingsButtonMessage}}</md-button>
 				</div>
 
 			<div style="float: left">
