@@ -22,9 +22,17 @@ angular.module('harReportCtrl', ['harReportService', 'chart.js'])
 	var largestResource = harReportService.findLargestResourceRequested(parsedHar);
 	var resourcesWithLoadTimes = harReportService.findResourcesWithLoadTime(parsedHar);
 
-	
+
 
 	$scope.highlights = [
+		{
+				"name": "Primary URL",
+				"value": harReportService.getPrimaryUrlRequested(parsedHar)
+		},
+		{
+				"name": "Date Requested",
+				"value": convertISO8601toDate(   harReportService.getDateUrlRequested(parsedHar))
+		},
 		{
 				"name": "Primary Page Load Time",
 				"value": getPrimaryPageLoadtime + " ms"
@@ -40,31 +48,37 @@ angular.module('harReportCtrl', ['harReportService', 'chart.js'])
 		}
 	];
 
+		$scope.primaryUrlRequested = harReportService.getPrimaryUrlRequested(parsedHar);
 
 
+		function convertISO8601toDate(dtstr) {
 
-	var data = {
-		 labels : ["January","February","March","April","May","June","July"],
-		 datasets : [
-			 {
-				 fillColor : "rgba(220,220,220,0.5)",
-				 strokeColor : "rgba(220,220,220,1)",
-				 pointColor : "rgba(220,220,220,1)",
-				 pointStrokeColor : "#fff",
-				 data : [65,59,90,81,56,55,40]
-			 },
-			 {
-				 fillColor : "rgba(151,187,205,0.5)",
-				 strokeColor : "rgba(151,187,205,1)",
-				 pointColor : "rgba(151,187,205,1)",
-				 pointStrokeColor : "#fff",
-				 data : [28,48,40,19,96,27,100]
-			 }
-		 ]
-	 }
+		  // replace anything but numbers by spaces
+		  dtstr = dtstr.replace(/\D/g," ");
 
-	 $scope.myChart = data;
+		  // trim any hanging white space
+		  dtstr = dtstr.replace(/\s+$/,"");
 
+		  // split on space
+		  var dtcomps = dtstr.split(" ");
+
+		  // not all ISO 8601 dates can convert, as is
+		  // unless month and date specified, invalid
+		  if (dtcomps.length < 3) return "invalid date";
+		  // if time not provided, set to zero
+		  if (dtcomps.length < 4) {
+		    dtcomps[3] = 0;
+		    dtcomps[4] = 0;
+		    dtcomps[5] = 0;
+		  }
+
+		  // modify month between 1 based ISO 8601 and zero based Date
+		  dtcomps[1]--;
+
+		  var convdt = new Date(Date.UTC(dtcomps[0],dtcomps[1],dtcomps[2],dtcomps[3],dtcomps[4],dtcomps[5]));
+
+		  return convdt.toUTCString();
+		}
 
 
 });

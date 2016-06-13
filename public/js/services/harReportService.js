@@ -15,6 +15,24 @@ angular.module('harReportService', [])
 				return entries.length;
 	},
 
+	getPrimaryUrlRequested : function (parsedHarJson) {
+			var log = parsedHarJson.log;
+			var pages = log.pages;
+			var page = pages[0];
+			var url = page.title;
+			return url;
+	},
+	getDateUrlRequested : function (parsedHarJson) {
+			var log = parsedHarJson.log;
+			var pages = log.pages;
+			var page = pages[0];
+			var date = page.startedDateTime;
+
+			//parse date??
+
+			return date;
+	},
+
 	getFastestLoadingResources :function(resourcesWithLoadTimes) {
 
 		resourcesWithLoadTimes.sort(function(a,b) {
